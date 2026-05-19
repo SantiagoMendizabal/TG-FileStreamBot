@@ -7,6 +7,9 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /app/fsb -ld
 
 FROM scratch
 COPY --from=builder /app/fsb /app/fsb
+
+# Definimos un puerto por defecto para que Docker no se quede vacío al compilar
+ARG PORT=8080
 EXPOSE ${PORT}
 
 # Indicar a Choreo que use un usuario sin privilegios
