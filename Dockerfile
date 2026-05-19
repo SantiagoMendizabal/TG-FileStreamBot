@@ -8,4 +8,8 @@ RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -o /app/fsb -ld
 FROM scratch
 COPY --from=builder /app/fsb /app/fsb
 EXPOSE ${PORT}
+
+# Indicar a Choreo que use un usuario sin privilegios
+USER 10014
+
 ENTRYPOINT ["/app/fsb", "run"]
